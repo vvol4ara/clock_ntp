@@ -1,16 +1,14 @@
 package main
- 
-import "fmt"
- 
-func add(x int, y int) int{
-    return x + y
-}
- 
+
+import (
+    "log"
+    "github.com/beevik/ntp"
+)
+
 func main() {
-     
-    var f func(int, int) int = add
-    fmt.Println(f(3, 7))
-     
-    var x = f(4, 5)     // 9
-    fmt.Println(x)
+    time, err := ntp.Time("pool.ntp.org")
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Printf("Current time: %v", time.Format("02 January 2006 15:04:05.000"))
 }
